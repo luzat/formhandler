@@ -48,3 +48,8 @@ module.tx_formhandler {
 		}
 	}
 }
+
+plugin.tx_formhandler_pi1 = USER_INT
+plugin.tx_formhandler_pi1 {
+	userFunc = Typoheads\Formhandler\Controller\FrontendFormController->main
+}

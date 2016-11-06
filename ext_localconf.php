@@ -4,7 +4,16 @@ if (!defined('TYPO3_MODE')) {
     die ('Access denied.');
 }
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43($_EXTKEY, 'pi1/class.tx_formhandler_pi1.php', '_pi1', 'CType', 0);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript('Typoheads.Formhandler', 'setup', '
+tt_content.formhandler_pi1 = COA
+tt_content.formhandler_pi1 {
+	10 =< lib.stdheader
+	20 >
+	20 =< plugin.tx_formhandler_pi1
+}
+', 'defaultContentRendering');
+
+#\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43($_EXTKEY, 'pi1/class.tx_formhandler_pi1.php', '_pi1', 'CType', 0);
 
 //Hook in tslib_content->stdWrap
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['stdWrap'][$_EXTKEY] = 'Typoheads\Formhandler\Hooks\StdWrapHook';

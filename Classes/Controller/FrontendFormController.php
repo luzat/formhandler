@@ -1,4 +1,6 @@
 <?php
+namespace Typoheads\Formhandler\Controller;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -23,22 +25,26 @@
  ***************************************************************/
 
 /**
- * Plugin 'Formhandler' for the 'formhandler' extension.
- *
- * @author Reinhard Führicht <rf@typoheads.at>
+ * Plugin 'Formhandler'
  */
-class tx_formhandler_pi1 extends TYPO3\CMS\Frontend\Plugin\AbstractPlugin
+class FrontendFormController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin
 {
-    var $prefixId = 'tx_formhandler_pi1';
-    var $scriptRelPath = 'pi1/class.tx_formhandler_pi1.php';
-    var $extKey = 'formhandler';
+    /**
+     * @var string
+     */
+    public $prefixId = 'tx_formhandler_pi1';
+
+    /**
+     * @var string
+     */
+    public $extKey = 'formhandler';
 
     /**
      * The main method of the PlugIn
      *
-     * @param    string $content : The PlugIn content
-     * @param    array $conf : The PlugIn configuration
-     * @return    The content that is displayed on the website
+     * @param string $content
+     * @param array $conf
+     * @return string
      */
     public function main($content, $conf)
     {
@@ -46,8 +52,4 @@ class tx_formhandler_pi1 extends TYPO3\CMS\Frontend\Plugin\AbstractPlugin
         $dispatcher->cObj = &$this->cObj;
         return $dispatcher->main($content, $conf);
     }
-}
-
-if (defined('TYPO3_MODE') && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/formhandler/pi1/class.tx_formhandler_pi1.php']) {
-    include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/formhandler/pi1/class.tx_formhandler_pi1.php']);
 }
