@@ -46,6 +46,7 @@ class Content
      */
     public function setContent($content)
     {
+        // @extensionScannerIgnoreLine
         $this->content = $content;
     }
 
@@ -56,6 +57,7 @@ class Content
      */
     public function getContent()
     {
+        // @extensionScannerIgnoreLine
         return $this->content;
     }
 
@@ -66,6 +68,7 @@ class Content
      */
     public function toString()
     {
+        // @extensionScannerIgnoreLine
         return $this->content;
     }
 }

@@ -16,7 +16,7 @@ namespace Typoheads\Formhandler\Ajax;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * @TODO: needs migration to middleware like others. finish when needed 
+ * @TODO: needs migration to middleware like others. finish when needed
  * A class removing uploaded files. This class is called via AJAX.
  */
 class RemoveFile
@@ -29,6 +29,7 @@ class RemoveFile
      */
     public function main()
     {
+        // @extensionScannerIgnoreLine
         $this->init();
         $content = '';
 
@@ -77,6 +78,7 @@ class RemoveFile
                 $view->setSettings($this->settings);
                 $view->fillFileMarkers($markers);
                 $langMarkers = $this->utilityFuncs->getFilledLangMarkers($markers['###' . $this->fieldName . '_uploadedFiles###'], $this->langFiles);
+                // @extensionScannerIgnoreLine
                 $markers['###' . $this->fieldName . '_uploadedFiles###'] = $this->globals->getCObj()->substituteMarkerArray($markers['###' . $this->fieldName . '_uploadedFiles###'], $langMarkers);
                 $content = $markers['###' . $this->fieldName . '_uploadedFiles###'];
             }

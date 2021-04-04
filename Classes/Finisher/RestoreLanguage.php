@@ -31,6 +31,8 @@ class RestoreLanguage extends AbstractFinisher
         if ($this->globals->getSession()->get('originalLanguage') !== null) {
             $lang = $this->globals->getSession()->get('originalLanguage');
             $GLOBALS['TSFE']->config['config']['language'] = $lang;
+            // FIXME: No longer supported
+            //// @extensionScannerIgnoreLine
             $GLOBALS['TSFE']->initLLvars();
             $this->globals->getSession()->set('originalLanguage', null);
             $this->utilityFuncs->debugMessage('Language restored to "' . $lang . '"!', [], 1);

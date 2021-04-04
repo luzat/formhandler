@@ -39,6 +39,7 @@ abstract class AbstractInterceptor extends \Typoheads\Formhandler\Component\Abst
                     if ($markAsSpam) {
                         $tsConfig['config.']['markAsSpam'] = 1;
                     }
+                    // @extensionScannerIgnoreLineyy
                     $obj->init($this->gp, $tsConfig['config.']);
                     $obj->process();
                 } else {

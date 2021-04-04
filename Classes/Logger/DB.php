@@ -85,7 +85,9 @@ class DB extends AbstractLogger
         }
 
         //query the database
+        // @extensionScannerIgnoreLine
         $GLOBALS['TYPO3_DB']->exec_INSERTquery($table, $fields);
+        // @extensionScannerIgnoreLine
         $insertedUID = $GLOBALS['TYPO3_DB']->sql_insert_id();
         $sessionValues = [
             'inserted_uid' => $insertedUID,
@@ -99,7 +101,9 @@ class DB extends AbstractLogger
 
         if (intval($this->utilityFuncs->getSingle($this->settings, 'nodebug')) !== 1) {
             $this->utilityFuncs->debugMessage('logging', [$table, implode(',', $fields)]);
+            // @extensionScannerIgnoreLine
             if (strlen($GLOBALS['TYPO3_DB']->sql_error()) > 0) {
+                // @extensionScannerIgnoreLine
                 $this->utilityFuncs->debugMessage('error', [$GLOBALS['TYPO3_DB']->sql_error()], 3);
             }
         }

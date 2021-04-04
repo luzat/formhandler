@@ -74,7 +74,7 @@ class Mail extends AbstractFinisher
 	 * @var TYPO3Mailer
 	 */
 	protected $emailObj = null;
-	
+
 	protected $predefined;
 
     /**
@@ -107,6 +107,7 @@ class Mail extends AbstractFinisher
         }
 
         $this->emailObj = $this->componentManager->getComponent($emailClass);
+        //// @extensionScannerIgnoreLine
         $this->emailObj->init($this->gp, $this->settings['mailer.']['config.']);
 
         $this->settings = $this->parseEmailSettings($this->settings, $type);
@@ -527,6 +528,7 @@ class Mail extends AbstractFinisher
             } else {
                 $langMarkers = $this->utilityFuncs->getFilledLangMarkers($value, $this->globals->getLangFiles());
                 if (!empty($langMarkers)) {
+                    // @extensionScannerIgnoreLine
                     $value = $this->TemplateService->substituteMarkerArray($value, $langMarkers);
                 }
             }
@@ -648,6 +650,7 @@ class Mail extends AbstractFinisher
                                 $generatorClass = $this->utilityFuncs->getPreparedClassName($options);
                                 if ($generatorClass) {
                                     $generator = $this->componentManager->getComponent($generatorClass);
+                                    //// @extensionScannerIgnoreLine
                                     $generator->init($this->gp, $options['config.']);
                                     $generator->getLink([]);
                                     $file = $generator->process();

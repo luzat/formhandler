@@ -55,6 +55,7 @@ class StoreGP extends AbstractFinisher
         }
         $dataToStoreInSession = $this->gp;
         $GLOBALS['TSFE']->fe_user->setKey('ses', $sessionKey, $dataToStoreInSession);
+        // @extensionScannerIgnoreLine
         $GLOBALS['TSFE']->fe_user->storeSessionData();
     }
 

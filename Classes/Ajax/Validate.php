@@ -21,7 +21,7 @@ use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * @todo later: 10.4 untested! (I didn't find use case in my projects) 
+ * @todo later: 10.4 untested! (I didn't find use case in my projects)
  * A class validating a field via AJAX.
  */
 class Validate
@@ -34,7 +34,7 @@ class Validate
         'spanSuccess' => '<span class="success">%s</span>',
         'spanError' => '<span class="error">%s</span>',
     );
-    
+
     /**
      * @var \Typoheads\Formhandler\Component\Manager
      */
@@ -49,6 +49,7 @@ class Validate
 	 */
     public function main(ServerRequestInterface $request, RequestHandlerInterface $handler)
     {
+        // @extensionScannerIgnoreLine
         $this->init();
         $field = htmlspecialchars(\TYPO3\CMS\Core\Utility\GeneralUtility::_GP('field'));
         if ($field) {

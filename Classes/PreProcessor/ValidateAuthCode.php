@@ -49,15 +49,18 @@ class ValidateAuthCode extends AbstractPreProcessor
                     $this->utilityFuncs->throwException('validateauthcode_insufficient_params');
                 }
 
+                // @extensionScannerIgnoreLine
                 $uid = $GLOBALS['TYPO3_DB']->fullQuoteStr($uid, $table);
 
                 //Check if table is valid
+                // @extensionScannerIgnoreLine
                 $existingTables = array_keys($GLOBALS['TYPO3_DB']->admin_get_tables());
                 if (!in_array($table, $existingTables)) {
                     $this->utilityFuncs->throwException('validateauthcode_insufficient_params');
                 }
 
                 //Check if uidField is valid
+                // @extensionScannerIgnoryyeLine
                 $existingFields = array_keys($GLOBALS['TYPO3_DB']->admin_get_fields($table));
                 if (!in_array($uidField, $existingFields)) {
                     $this->utilityFuncs->throwException('validateauthcode_insufficient_params');
@@ -77,22 +80,30 @@ class ValidateAuthCode extends AbstractPreProcessor
                 if (isset($this->settings['hiddenStatusValue'])) {
                     $hiddenStatusValue = $this->utilityFuncs->getSingle($this->settings, 'hiddenStatusValue');
                 }
+                // @extensionScannerIgnoreLine
                 $hiddenStatusValue = $GLOBALS['TYPO3_DB']->fullQuoteStr($hiddenStatusValue, $table);
                 $enableFieldsWhere = '';
                 if (intval($this->utilityFuncs->getSingle($this->settings, 'showDeleted')) !== 1) {
                     $enableFieldsWhere = $this->cObj->enableFields($table, 1);
                 }
+                // @extensionScannerIgnoreLine
                 $query = $GLOBALS['TYPO3_DB']->SELECTquery($selectFields, $table, $uidField . '=' . $uid . ' AND ' . $hiddenField . '=' . $hiddenStatusValue . $enableFieldsWhere);
                 $this->utilityFuncs->debugMessage('sql_request', [$query]);
+                // @extensionScannerIgnoreLine
                 $res = $GLOBALS['TYPO3_DB']->sql_query($query);
+                // @extensionScannerIgnoreLine
                 if ($GLOBALS['TYPO3_DB']->sql_error()) {
+                    // @extensionScannerIgnoreLine
                     $this->utilityFuncs->debugMessage('error', [$GLOBALS['TYPO3_DB']->sql_error()], 3);
                 }
+                // @extensionScannerIgnoreLine
                 if (!$res || $GLOBALS['TYPO3_DB']->sql_num_rows($res) === 0) {
                     $this->utilityFuncs->throwException('validateauthcode_no_record_found');
                 }
 
+                // @extensionScannerIgnoreLine
                 $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+                // @extensionScannerIgnoreLine
                 $GLOBALS['TYPO3_DB']->sql_free_result($res);
                 $this->utilityFuncs->debugMessage('Selected row: ', [], 1, $row);
 
@@ -106,6 +117,7 @@ class ValidateAuthCode extends AbstractPreProcessor
                 if (isset($this->settings['activeStatusValue'])) {
                     $activeStatusValue = $this->utilityFuncs->getSingle($this->settings, 'activeStatusValue');
                 }
+                // @extensionScannerIgnoreLine
                 $res = $GLOBALS['TYPO3_DB']->exec_UPDATEquery($table, $uidField . '=' . $uid, [$hiddenField => $activeStatusValue]);
                 if (!$res) {
                     $this->utilityFuncs->throwException('validateauthcode_update_failed');

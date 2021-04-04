@@ -19,7 +19,7 @@ namespace Typoheads\Formhandler\View;
  */
 class Form extends AbstractView
 {
-	
+
 	protected $masterTemplates = [];
 	protected $errors = [];
 	protected $settings = [];
@@ -80,6 +80,7 @@ class Form extends AbstractView
         if ($this->globals->getAjaxHandler()) {
             $markers = [];
             $this->globals->getAjaxHandler()->fillAjaxMarkers($markers);
+            // @extensionScannerIgnoreLine
             $this->template = $this->TemplateService->substituteMarkerArray($this->template, $markers);
         }
 
@@ -220,6 +221,7 @@ class Form extends AbstractView
                                 foreach ($params as $paramKey => $paramValue) {
                                     $markers['###param' . (++$paramKey) . '###'] = $paramValue;
                                 }
+                                // @extensionScannerIgnoreLine
                                 $replacedCode = $this->TemplateService->substituteMarkerArray($code, $markers);
                             } else {
                                 $replacedCode = $code;
@@ -230,6 +232,7 @@ class Form extends AbstractView
                 }
             }
         }
+        // @extensionScannerIgnoreLine
         $this->template = $this->TemplateService->substituteMarkerArray($this->template, $fieldMarkers);
     }
 
@@ -361,6 +364,7 @@ class Form extends AbstractView
             '###FORM_STARTBLOCK###' => $this->globals->getSession()->get('startblock'),
             '###FORM_ENDBLOCK###' => $this->globals->getSession()->get('endblock')
         ];
+        // @extensionScannerIgnoreLine
         $this->template = $this->TemplateService->substituteMarkerArray($this->template, $markers);
     }
 
@@ -393,6 +397,7 @@ class Form extends AbstractView
         unset($values['formErrors']);
         $markers = $this->getSelectedMarkers($values);
         $markers = array_merge($markers, $this->getSelectedMarkers($this->gp, 0, 'checked_'));
+        // @extensionScannerIgnoreLine
         $this->template = $this->TemplateService->substituteMarkerArray($this->template, $markers);
 
         $this->template = preg_replace('/###(selected|checked)_.*?###/i', '', $this->template);
@@ -406,7 +411,7 @@ class Form extends AbstractView
     protected function fillDefaultMarkers()
     {
         $parameters = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET();
-        
+
         // compatibility with 10.x routes / it doesn't translate it automatically back to get param, so it's not passed the easy way...
 	    $parameters = $_REQUEST;
         $parameters['type'] = $GLOBALS['TYPO3_REQUEST']->getAttributes()['routing']['pageType'];
@@ -630,6 +635,7 @@ class Form extends AbstractView
             );
         }
 
+        // @extensionScannerIgnoreLine
         $this->template = $this->TemplateService->substituteMarkerArray($this->template, $markers);
     }
 
@@ -858,8 +864,8 @@ class Form extends AbstractView
                         $onClick .= 'return false;';
 
                         $link = '<a
-								href="javascript:void(0)" 
-								class="formhandler_removelink" 
+								href="javascript:void(0)"
+								class="formhandler_removelink"
 								onclick="' . str_replace(["\n", '	'], '', $onClick) . '"
 								>' . $text . '</a>';
                     }
@@ -963,6 +969,7 @@ class Form extends AbstractView
             $errorMessage = $temp;
         }
         $markers['###is_error###'] = $errorMessage;
+        // @extensionScannerIgnoreLine
         $this->template = $this->TemplateService->substituteMarkerArray($this->template, $markers);
     }
 
@@ -991,6 +998,7 @@ class Form extends AbstractView
                 $markers['###is_success_' . $field . '###'] = $successMessage;
             }
         }
+        // @extensionScannerIgnoreLine
         $this->template = $this->TemplateService->substituteMarkerArray($this->template, $markers);
     }
 
@@ -1054,6 +1062,7 @@ class Form extends AbstractView
                 $errorMessage = '<a name="' . $field . '-' . $this->globals->getRandomID() . '">' . $errorMessage . '</a>';
             }
             $langMarkers = $this->utilityFuncs->getFilledLangMarkers($errorMessage, $this->langFiles);
+            // @extensionScannerIgnoreLine
             $errorMessage = $this->TemplateService->substituteMarkerArray($errorMessage, $langMarkers);
             $markers['###error_' . $field . '###'] = $errorMessage;
             $markers['###ERROR_' . strtoupper($field) . '###'] = $errorMessage;
@@ -1072,8 +1081,10 @@ class Form extends AbstractView
         }
         $markers['###ERROR###'] = $this->utilityFuncs->wrap($markers['###ERROR###'], $this->settings['errorListTemplate.'], 'totalWrap');
         $langMarkers = $this->utilityFuncs->getFilledLangMarkers($markers['###ERROR###'], $this->langFiles);
+        // @extensionScannerIgnoreLine
         $markers['###ERROR###'] = $this->TemplateService->substituteMarkerArray($markers['###ERROR###'], $langMarkers);
         $markers['###error###'] = $markers['###ERROR###'];
+        // @extensionScannerIgnoreLine
         $this->template = $this->TemplateService->substituteMarkerArray($this->template, $markers);
     }
 
@@ -1092,6 +1103,7 @@ class Form extends AbstractView
                 }
             }
         }
+        // @extensionScannerIgnoreLine
         $this->template = $this->TemplateService->substituteMarkerArray($this->template, $markers);
     }
 
@@ -1112,6 +1124,7 @@ class Form extends AbstractView
             $this->disableEncodingFields = explode(',', $this->utilityFuncs->getSingle($this->settings, 'disableEncodingFields'));
         }
         $markers = $this->getValueMarkers($this->gp);
+        // @extensionScannerIgnoreLine
         $this->template = $this->TemplateService->substituteMarkerArray($this->template, $markers);
 
         //remove remaining VALUE_-markers
@@ -1216,6 +1229,7 @@ class Form extends AbstractView
                 $langMarkers['###LLL:' . $marker . '###'] = $message;
             }
         }
+        // @extensionScannerIgnoreLine
         $this->template = $this->TemplateService->substituteMarkerArray($this->template, $langMarkers);
     }
 

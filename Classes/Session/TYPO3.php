@@ -31,6 +31,7 @@ class TYPO3 extends AbstractSession
         }
         $data[$this->globals->getRandomID()][$key] = $value;
         $GLOBALS['TSFE']->fe_user->setKey('ses', 'formhandler', $data);
+        // @extensionScannerIgnoreLine
         $GLOBALS['TSFE']->fe_user->storeSessionData();
     }
 
@@ -50,6 +51,7 @@ class TYPO3 extends AbstractSession
             }
 
             $GLOBALS['TSFE']->fe_user->setKey('ses', 'formhandler', $data);
+            // @extensionScannerIgnoreLine
             $GLOBALS['TSFE']->fe_user->storeSessionData();
         }
     }
@@ -83,6 +85,7 @@ class TYPO3 extends AbstractSession
         $data = $GLOBALS['TSFE']->fe_user->getKey('ses', 'formhandler');
         unset($data[$this->globals->getRandomID()]);
         $GLOBALS['TSFE']->fe_user->setKey('ses', 'formhandler', $data);
+        // @extensionScannerIgnoreLine
         $GLOBALS['TSFE']->fe_user->storeSessionData();
     }
 
@@ -103,6 +106,7 @@ class TYPO3 extends AbstractSession
         }
 
         $GLOBALS['TSFE']->fe_user->setKey('ses', 'formhandler', $data);
+        // @extensionScannerIgnoreLine
         $GLOBALS['TSFE']->fe_user->storeSessionData();
     }
 }

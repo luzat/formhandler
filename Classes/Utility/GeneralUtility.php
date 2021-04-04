@@ -833,7 +833,7 @@ class GeneralUtility implements SingletonInterface
 
     public static function generateRandomID()
     {
-        $randomID = md5(\Typoheads\Formhandler\Utility\Globals::getFormValuesPrefix() 
+        $randomID = md5(\Typoheads\Formhandler\Utility\Globals::getFormValuesPrefix()
 	        . \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Crypto\Random::class)->generateRandomBytes(10)
         );
         return $randomID;
@@ -846,11 +846,11 @@ class GeneralUtility implements SingletonInterface
 	 */
     public static function initializeTSFE($pid, ServerRequestInterface $request)
     {
-    	
-    	
-    	
-    	
-    	
+
+
+
+
+
     	$GLOBALS['TYPO3_REQUEST'] = $request;
         /** @var Site $site */
         $site = $request->getAttribute('site', null);
@@ -865,15 +865,16 @@ class GeneralUtility implements SingletonInterface
             );
         }
         $context->setAspect('frontend.preview', GeneralUtility::makeInstance(PreviewAspect::class));
-        
-        
-        
+
+
+
         // create object instances:
         $GLOBALS['TSFE'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class,
 	        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(Context::class),
-	        
-	        $GLOBALS['TYPO3_CONF_VARS'], $pid, 0, true);
+
+	        $GLOBALS['TYPO3_CONF_VARS'], $pid, null, true);
         $GLOBALS['TSFE']->tmpl = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\TypoScript\TemplateService');
+        // @extensionScannerIgnoreLine
         $GLOBALS['TSFE']->tmpl->init();
 
         // then initialize fe user

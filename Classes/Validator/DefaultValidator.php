@@ -241,6 +241,7 @@ class DefaultValidator extends AbstractValidator
                 }
                 if (empty($this->restrictErrorChecks) || in_array($check['check'], $this->restrictErrorChecks)) {
                     $this->utilityFuncs->debugMessage('calling_class', [$fullClassName]);
+                    // @extensionScannerIgnoreLine
                     $errorCheckObject->init($gp, $check);
                     $errorCheckObject->setFormFieldName($fieldName);
                     if ($errorCheckObject->validateConfig()) {

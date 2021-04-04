@@ -137,6 +137,7 @@ class Ajax extends AbstractValidator
                         $this->utilityFuncs->debugMessage('check_not_found', [$fullClassName], 2);
                     }
                     if (empty($restrictErrorChecks) || in_array($check['check'], $restrictErrorChecks)) {
+                        // @extensionScannerIgnoreLine
                         $errorCheckObject->init($gp, $check);
                         $errorCheckObject->setFormFieldName($field);
                         if ($errorCheckObject->validateConfig()) {

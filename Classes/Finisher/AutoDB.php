@@ -65,6 +65,7 @@ class AutoDB extends DB
             $this->newFieldsSqlAttribs = $this->utilityFuncs->getSingle($this->settings, 'newFieldsSqlAttribs');
         }
 
+        // @extensionScannerIgnoreLine
         $this->db = $GLOBALS['TYPO3_DB'];
     }
 

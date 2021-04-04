@@ -42,6 +42,7 @@ class ClearSession extends AbstractPreProcessor
 
         foreach ($sessionKeysToRemove as $sessionKey) {
             $GLOBALS['TSFE']->fe_user->setKey('ses', $sessionKey, null);
+            // @extensionScannerIgnoreLine
             $GLOBALS['TSFE']->fe_user->storeSessionData();
         }
 

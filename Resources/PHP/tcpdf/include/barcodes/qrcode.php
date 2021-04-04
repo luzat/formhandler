@@ -729,7 +729,8 @@ class QRcode {
 		$this->eccLength = $this->rsEccLength($spec);
 		$this->ecccode = array_fill(0, $this->eccLength, 0);
 		$this->blocks = $this->rsBlockNum($spec);
-		$ret = $this->init($spec);
+        // @extensionScannerIgnoreLine
+        $ret = $this->init($spec);
 		if ($ret < 0) {
 			return NULL;
 		}
@@ -2595,13 +2596,17 @@ class QRcode {
 		if (($version < 1) OR ($version > QRSPEC_VERSION_MAX)) {
 			return NULL;
 		}
-		if (!isset($this->frames[$version])) {
-			$this->frames[$version] = $this->createFrame($version);
+        // @extensionScannerIgnoreLine
+        if (!isset($this->frames[$version])) {
+            // @extensionScannerIgnoreLine
+            $this->frames[$version] = $this->createFrame($version);
 		}
-		if (is_null($this->frames[$version])) {
+        // @extensionScannerIgnoreLine
+        if (is_null($this->frames[$version])) {
 			return NULL;
 		}
-		return $this->frames[$version];
+        // @extensionScannerIgnoreLine
+        return $this->frames[$version];
 	}
 
 	/**

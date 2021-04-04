@@ -62,6 +62,7 @@ abstract class AbstractController extends AbstractClass
      */
     public function setContent($content)
     {
+        // @extensionScannerIgnoreLine
         $this->content = $content;
     }
 
@@ -72,6 +73,7 @@ abstract class AbstractController extends AbstractClass
      */
     public function getContent()
     {
+        // @extensionScannerIgnoreLine
         return $this->content;
     }
 

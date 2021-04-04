@@ -201,16 +201,23 @@ class LoadDB extends AbstractPreProcessor
      */
     protected function loadDB($settings)
     {
+        // @extensionScannerIgnoreLine
         $store_lastBuiltQuery = $GLOBALS['TYPO3_DB']->store_lastBuiltQuery;
+        // @extensionScannerIgnoreLine
         $GLOBALS['TYPO3_DB']->store_lastBuiltQuery = true;
         $res = $this->exec_getQuery($this->utilityFuncs->getSingle($settings, 'table'), $settings);
+        // @extensionScannerIgnoreLine
         $sql = $GLOBALS['TYPO3_DB']->debug_lastBuiltQuery;
         $this->utilityFuncs->debugMessage($sql);
 
+        // @extensionScannerIgnoreLine
         $GLOBALS['TYPO3_DB']->store_lastBuiltQuery = $store_lastBuiltQuery;
+        // @extensionScannerIgnoreLine
         $rowCount = $GLOBALS['TYPO3_DB']->sql_num_rows($res);
         if ($rowCount === 1) {
+            // @extensionScannerIgnoreLine
             $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+            // @extensionScannerIgnoreLine
             $GLOBALS['TYPO3_DB']->sql_free_result($res);
             return $row;
         } elseif ($rowCount > 0) {
@@ -242,6 +249,7 @@ class LoadDB extends AbstractPreProcessor
         if (!isset($conf['pidInList']) || strlen($conf['pidInList']) === 0) {
             $queryParts['WHERE'] = preg_replace('/([^ ]+\.pid IN \([^ ]+\) AND )/i', '', $queryParts['WHERE']);
         }
+        // @extensionScannerIgnoreLine
         return $GLOBALS['TYPO3_DB']->exec_SELECT_queryArray($queryParts);
     }
 }

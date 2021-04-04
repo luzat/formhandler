@@ -44,6 +44,7 @@ class SubmittedOK extends Form
                 $class = $this->utilityFuncs->getPreparedClassName($options);
                 if ($class) {
                     $generator = $this->componentManager->getComponent($class);
+                    // @extensionScannerIgnoreLine
                     $generator->init($this->gp, $options['config.']);
                     $markers['###' . strtoupper($sanitizedAction) . '_LINK###'] = $generator->getLink($params);
                 }
@@ -51,6 +52,7 @@ class SubmittedOK extends Form
         }
         $this->fillFEUserMarkers($markers);
         $this->fillFileMarkers($markers);
+        // @extensionScannerIgnoreLine
         $this->template = $this->TemplateService->substituteMarkerArray($this->template, $markers);
     }
 }

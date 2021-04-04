@@ -11,7 +11,6 @@ return [
         'adminOnly' => 1
     ],
     'interface' => [
-        'showRecordFieldList' => 'crdate,ip,params,is_spam,key_hash'
     ],
     'columns' => [
         'crdate' => [

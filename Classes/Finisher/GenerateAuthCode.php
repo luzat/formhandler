@@ -55,6 +55,7 @@ class GenerateAuthCode extends AbstractFinisher
             }
         }
         $table = $firstInsertInfo['table'];
+        // @extensionScannerIgnoreLine
         $uid = $GLOBALS['TYPO3_DB']->fullQuoteStr($firstInsertInfo['uid'], $table);
         $uidField = $firstInsertInfo['uidField'];
         if (!$uidField) {
@@ -65,8 +66,10 @@ class GenerateAuthCode extends AbstractFinisher
             if ($this->settings['selectFields']) {
                 $selectFields = $this->utilityFuncs->getSingle($this->settings, 'selectFields');
             }
+            // @extensionScannerIgnoreLine
             $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($selectFields, $table, $uidField . '=' . $uid);
             if ($res) {
+                // @extensionScannerIgnoreLine
                 $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
                 $authCode = $this->generateAuthCode($row);
                 $this->gp['generated_authCode'] = $authCode;

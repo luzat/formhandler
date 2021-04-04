@@ -115,6 +115,7 @@ class Form extends AbstractController
      */
     public function process()
     {
+        // @extensionScannerIgnoreLine
         $this->init();
         $this->storeFileNamesInGP();
         $this->processFileRemoval();
@@ -178,11 +179,16 @@ class Form extends AbstractController
 
             $params = [];
             $tstamp = intval($gp['tstamp']);
+            // @extensionScannerIgnoreLine
             $hash = $GLOBALS['TYPO3_DB']->fullQuoteStr($gp['hash'], 'tx_formhandler_log');
             if ($tstamp && strpos($hash, ' ') === false) {
+                // @extensionScannerIgnoreLine
                 $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('params', 'tx_formhandler_log', 'tstamp=' . $tstamp . ' AND unique_hash=' . $hash);
+                // @extensionScannerIgnoreLine
                 if ($res && $GLOBALS['TYPO3_DB']->sql_num_rows($res) === 1) {
+                    // @extensionScannerIgnoreLine
                     $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+                    // @extensionScannerIgnoreLine
                     $GLOBALS['TYPO3_DB']->sql_free_result($res);
                     $params = unserialize($row['params']);
                 }
@@ -797,7 +803,7 @@ class Form extends AbstractController
                                         $uploadedUrl = rtrim(\TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('TYPO3_SITE_URL'), '/');
                                         $uploadedUrl .= '/' . trim($uploadFolder, '/') . '/';
                                         $uploadedUrl .= trim($uploadedFileName, '/');
-                                        
+
                                         $tmp['uploaded_url'] = $uploadedUrl;
                                         $tmp['size'] = $files['size'][$field][$idx];
                                         if (is_array($files['type'][$field][$idx])) {

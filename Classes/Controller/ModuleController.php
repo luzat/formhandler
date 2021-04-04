@@ -218,6 +218,7 @@ class ModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
                 $generator = $this->componentManager->getComponent($className);
                 $this->settings['pdf']['config']['records'] = $convertedLogDataRows;
                 $this->settings['pdf']['config']['exportFields'] = $fields;
+                // @extensionScannerIgnoreLine
                 $generator->init([], $this->settings['pdf']['config']);
                 $generator->process();
             } elseif ($filetype === 'csv') {
@@ -229,6 +230,7 @@ class ModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
                 $generator = $this->componentManager->getComponent($className);
                 $this->settings['csv']['config']['records'] = $convertedLogDataRows;
                 $this->settings['csv']['config']['exportFields'] = $fields;
+                // @extensionScannerIgnoreLine
                 $generator->init([], $this->settings['csv']['config']);
                 $generator->process();
             }
@@ -246,16 +248,20 @@ class ModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         if ($logDataUids === 'all') {
             $text = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('message.deleted-all-logs', 'formhandler');
             if ($forceDelete) {
+                // @extensionScannerIgnoreLine
                 $GLOBALS['TYPO3_DB']->exec_TRUNCATEquery('tx_formhandler_log');
             } else {
+                // @extensionScannerIgnoreLine
                 $GLOBALS['TYPO3_DB']->exec_UPDATEquery('tx_formhandler_log', '1=1', ['deleted' => 1]);
             }
         } else {
             $logDataUids = explode(',', $logDataUids);
             $text = sprintf(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('message.deleted-log-rows', 'formhandler'), count($logDataUids));
             if ($forceDelete) {
+                // @extensionScannerIgnoreLine
                 $GLOBALS['TYPO3_DB']->exec_DELETEquery('tx_formhandler_log', 'uid IN (' . implode(',', $logDataUids) . ')');
             } else {
+                // @extensionScannerIgnoreLine
                 $GLOBALS['TYPO3_DB']->exec_UPDATEquery('tx_formhandler_log', 'uid IN (' . implode(',', $logDataUids) . ')', ['deleted' => 1]);
             }
         }

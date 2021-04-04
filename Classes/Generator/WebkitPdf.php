@@ -14,6 +14,9 @@ namespace Typoheads\Formhandler\Generator;
     * Public License for more details.                                       *
     *                                                                        */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\RootlineUtility;
+
 /**
  * PDF generator class for Formhandler using the extension "webkitpdf"
  */
@@ -61,13 +64,17 @@ class WebkitPdf extends AbstractGenerator
     {
         $sysPageObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Frontend\Page\PageRepository');
 
+        // @extensionScannerIgnoreLine
         if (!$GLOBALS['TSFE']->sys_page) {
+            // @extensionScannerIgnoreLine
             $GLOBALS['TSFE']->sys_page = $sysPageObj;
         }
 
-        $rootLine = $sysPageObj->getRootLine($GLOBALS['TSFE']->id);
+        $rootLineUtility = GeneralUtility::makeInstance(RootlineUtility::class, $GLOBALS['TSFE']->id);
+        $rootLine = $rootLineUtility::getLine();
         $TSObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Core\TypoScript\ExtendedTemplateService');
         $TSObj->tt_track = 0;
+        // @extensionScannerIgnoreLine
         $TSObj->init();
         $TSObj->runThroughTemplates($rootLine);
         $TSObj->generateConfig();

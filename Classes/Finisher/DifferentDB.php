@@ -104,6 +104,7 @@ class DifferentDB extends DB
         $isSuccess = true;
 
         // get insert query
+        // @extensionScannerIgnoreLine
         $query = $GLOBALS['TYPO3_DB']->INSERTquery($this->table, $queryFields);
         $this->utilityFuncs->debugMessage('sql_request', [$query]);
 
@@ -125,8 +126,10 @@ class DifferentDB extends DB
         $isSuccess = true;
 
         // build update query
+        // @extensionScannerIgnoreLine
         $uid = $GLOBALS['TYPO3_DB']->fullQuoteStr($uid, $this->table);
         $andWhere = $this->utilityFuncs->prepareAndWhereString($andWhere);
+        // @extensionScannerIgnoreLine
         $query = $GLOBALS['TYPO3_DB']->UPDATEquery($this->table, $this->key . '=' . $uid . $andWhere, $queryFields);
         $this->utilityFuncs->debugMessage('sql_request', [$query]);
 
@@ -145,15 +148,17 @@ class DifferentDB extends DB
     protected function doesRecordExist($uid, $andWhere)
     {
         $exists = false;
-        
+
         if ($uid) {
+            // @extensionScannerIgnoreLine
             $uid = $GLOBALS['TYPO3_DB']->fullQuoteStr($uid, $this->table);
             $andWhere = $this->utilityFuncs->prepareAndWhereString($andWhere);
+            // @extensionScannerIgnoreLine
             $query = $GLOBALS['TYPO3_DB']->SELECTquery($this->key, $this->table, $this->key . '=' . $uid . $andWhere);
 
             /** @var \ADORecordSet $rs */
             $rs = $this->connection->Execute($query);
-            
+
             if ($rs->RecordCount() > 0) {
                 $exists = true;
             }

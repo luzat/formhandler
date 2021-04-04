@@ -35,15 +35,20 @@ class IsNotInDBTable extends AbstractErrorCheck
             $additionalWhere = $this->utilityFuncs->getSingle($this->settings['params'], 'additionalWhere');
             if (!empty($checkTable) && !empty($checkField)) {
                 $additionalWhere = $this->utilityFuncs->prepareAndWhereString($additionalWhere);
+                // @extensionScannerIgnoreLine
                 $where = $checkField . '=' . $GLOBALS['TYPO3_DB']->fullQuoteStr($this->gp[$this->formFieldName], $checkTable) . $additionalWhere;
                 $showHidden = intval($this->settings['params']['showHidden']) === 1 ? 1 : 0;
                 $where .= $GLOBALS['TSFE']->sys_page->enableFields($checkTable, $showHidden);
+                // @extensionScannerIgnoreLine
                 $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($checkField, $checkTable, $where);
+                // @extensionScannerIgnoreLine
                 if ($res && $GLOBALS['TYPO3_DB']->sql_num_rows($res) > 0) {
                     $checkFailed = $this->getCheckFailed();
                 } elseif (!$res) {
+                    // @extensionScannerIgnoreLine
                     $this->utilityFuncs->debugMessage('error', [$GLOBALS['TYPO3_DB']->sql_error()], 3);
                 }
+                // @extensionScannerIgnoreLine
                 $GLOBALS['TYPO3_DB']->sql_free_result($res);
             }
         }

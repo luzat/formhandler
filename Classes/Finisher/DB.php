@@ -165,12 +165,16 @@ class DB extends AbstractFinisher
     {
         $exists = false;
         if ($uid) {
+            // @extensionScannerIgnoreLine
             $uid = $GLOBALS['TYPO3_DB']->fullQuoteStr($uid, $this->table);
             $andWhere = $this->utilityFuncs->prepareAndWhereString($andWhere);
+            // @extensionScannerIgnoreLine
             $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($this->key, $this->table, $this->key . '=' . $uid . $andWhere);
+            // @extensionScannerIgnoreLine
             if ($res && $GLOBALS['TYPO3_DB']->sql_num_rows($res) > 0) {
                 $exists = true;
             }
+            // @extensionScannerIgnoreLine
             $GLOBALS['TYPO3_DB']->sql_free_result($res);
         }
         return $exists;
@@ -179,11 +183,15 @@ class DB extends AbstractFinisher
     protected function doInsert($queryFields)
     {
         $isSuccess = true;
+        // @extensionScannerIgnoreLine
         $query = $GLOBALS['TYPO3_DB']->INSERTquery($this->table, $queryFields);
         $this->utilityFuncs->debugMessage('sql_request', [$query]);
+        // @extensionScannerIgnoreLine
         $GLOBALS['TYPO3_DB']->sql_query($query);
+        // @extensionScannerIgnoreLine
         if ($GLOBALS['TYPO3_DB']->sql_error()) {
             $isSuccess = false;
+            // @extensionScannerIgnoreLine
             $this->utilityFuncs->debugMessage('error', [$GLOBALS['TYPO3_DB']->sql_error()], 3);
         }
         return $isSuccess;
@@ -192,13 +200,18 @@ class DB extends AbstractFinisher
     protected function doUpdate($uid, $queryFields, $andWhere)
     {
         $isSuccess = true;
+        // @extensionScannerIgnoreLine
         $uid = $GLOBALS['TYPO3_DB']->fullQuoteStr($uid, $this->table);
         $andWhere = $this->utilityFuncs->prepareAndWhereString($andWhere);
+        // @extensionScannerIgnoreLine
         $query = $GLOBALS['TYPO3_DB']->UPDATEquery($this->table, $this->key . '=' . $uid . $andWhere, $queryFields);
         $this->utilityFuncs->debugMessage('sql_request', [$query]);
+        // @extensionScannerIgnoreLine
         $GLOBALS['TYPO3_DB']->sql_query($query);
+        // @extensionScannerIgnoreLine
         if ($GLOBALS['TYPO3_DB']->sql_error()) {
             $isSuccess = false;
+            // @extensionScannerIgnoreLine
             $this->utilityFuncs->debugMessage('error', [$GLOBALS['TYPO3_DB']->sql_error()], 3);
         }
         return $isSuccess;
@@ -446,6 +459,7 @@ class DB extends AbstractFinisher
      */
     protected function getInsertedUid()
     {
+        // @extensionScannerIgnoreLine
         $uid = $GLOBALS['TYPO3_DB']->sql_insert_id();
         return intval($uid);
     }

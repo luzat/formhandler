@@ -128,7 +128,7 @@ abstract class AbstractView extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin
     protected $gp;
 
     protected $componentSettings;
-    
+
     /**
      * @var MarkerBasedTemplateService
      */
@@ -234,7 +234,9 @@ abstract class AbstractView extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin
      */
     public function setTemplate($templateCode, $templateName, $forceTemplate = false)
     {
+        // @extensionScannerIgnoreLine
         $this->subparts['template'] = $this->TemplateService->getSubpart($templateCode, '###TEMPLATE_' . $templateName . '###');
+        // @extensionScannerIgnoreLine
         $this->subparts['item'] = $this->TemplateService->getSubpart($this->subparts['template'], '###ITEM###');
     }
 

@@ -29,12 +29,14 @@ class SetLanguage extends AbstractFinisher
     public function process()
     {
         if ($this->globals->getSession()->get('originalLanguage') === null) {
-            $this->globals->getSession()->set('originalLanguage', $GLOBALS['TSFE']->lang);
+            $this->globals->getSession()->set('originalLanguage', $GLOBALS['TYPO3_REQUEST']->getAttribute('language')->getTypo3Language());
         }
         $languageCode = $this->utilityFuncs->getSingle($this->settings, 'languageCode');
         if ($languageCode) {
             $lang = strtolower($languageCode);
             $GLOBALS['TSFE']->config['config']['language'] = $lang;
+            // FIXME: No longer supported
+            //// @extensionScannerIgnoreLine
             $GLOBALS['TSFE']->initLLvars();
             $this->utilityFuncs->debugMessage('Language set to "' . $lang . '"!', [], 1);
         } else {

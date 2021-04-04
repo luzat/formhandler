@@ -45,6 +45,7 @@ class Submit
 	 */
     public function main(ServerRequestInterface $request, RequestHandlerInterface $handler)
     {
+        // @extensionScannerIgnoreLine
         $this->init();
 
         $settings = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_formhandler_pi1.'];
@@ -53,7 +54,7 @@ class Submit
         $content = $GLOBALS['TSFE']->cObj->cObjGetSingle('USER', $settings);
 
         $content = '{' . json_encode('form') . ':' . json_encode($content, JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS) . '}';
-        
+
         // print $content;
         $response = GeneralUtility::makeInstance(Response::class);
         //$response = $response->withHeader('Content-type', 'text/html');   // I'm not really sure if the output is always of one type
@@ -77,7 +78,7 @@ class Submit
         $this->componentManager = GeneralUtility::makeInstance(\Typoheads\Formhandler\Component\Manager::class);
 
         $elementUID = intval($_GET['uid']);
-        
+
         /** @var QueryBuilder $queryBuilder */
 		$queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('tt_content')->createQueryBuilder();
 		$row = $queryBuilder
@@ -89,7 +90,7 @@ class Submit
 			->setMaxResults(1)
 			->execute()
 			->fetch();
-		
+
         if (!empty($row)) {
             $GLOBALS['TSFE']->cObj->data = $row;
             $GLOBALS['TSFE']->cObj->current = 'tt_content_' . $elementUID;

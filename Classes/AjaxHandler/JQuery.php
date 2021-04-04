@@ -14,6 +14,9 @@ namespace Typoheads\Formhandler\AjaxHandler;
     * Public License for more details.                                       *
     *                                                                        */
 
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Abstract class for an AjaxHandler.
  * The AjaxHandler takes care of adding AJAX related markers and JS used for validation and file removal.
@@ -174,6 +177,7 @@ class JQuery extends \Typoheads\Formhandler\AjaxHandler\AbstractAjaxHandler
     protected function addJS($js, $key = '', $doAppend = true)
     {
         if ($this->jsPosition === 'inline') {
+            // @extensionScannerIgnoreLine
             $GLOBALS['TSFE']->content .= $js;
         } elseif ($this->jsPosition === 'footer') {
             if ($doAppend) {
@@ -201,6 +205,8 @@ class JQuery extends \Typoheads\Formhandler\AjaxHandler\AbstractAjaxHandler
      */
     protected function getJavascriptFormInit($formSelector, $submitButtonSelector, $isAjaxSubmit, $autoDisableSubmitButton, $validateFields)
     {
+        $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
+
         return '(function( $ ) {
                     $(function() {
                         $("'.$formSelector.'").formhandler({
@@ -208,7 +214,7 @@ class JQuery extends \Typoheads\Formhandler\AjaxHandler\AbstractAjaxHandler
                             contentID: "'.$this->cObj->data['uid'].'",
                             randomID: "'.$this->globals->getRandomID().'",
                             formValuesPrefix: "'.$this->globals->getFormValuesPrefix().'",
-                            lang: "'.$GLOBALS['TSFE']->sys_language_uid.'",
+                            lang: "'.$languageAspect->getId().'",
                             submitButtonSelector: "'.$submitButtonSelector.'",
                             ajaxSubmit: '.($isAjaxSubmit ? "true" : "false").',
                             autoDisableSubmitButton: '.($autoDisableSubmitButton ? "true" : "false").',

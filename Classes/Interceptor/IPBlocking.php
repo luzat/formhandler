@@ -97,7 +97,9 @@ class IPBlocking extends AbstractInterceptor
         if ($addIPToWhere) {
             $where = 'ip=\'' . \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('REMOTE_ADDR') . '\' AND ' . $where;
         }
+        // @extensionScannerIgnoreLine
         $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid,ip,crdate,params', $this->logTable, $where);
+        // @extensionScannerIgnoreLine
         if ($res && $GLOBALS['TYPO3_DB']->sql_num_rows($res) >= $maxValue) {
             $this->log(true);
             $message = 'You are not allowed to send more mails because the form got submitted too many times ';
@@ -106,6 +108,7 @@ class IPBlocking extends AbstractInterceptor
             }
             $message .= 'in the last ' . $value . ' ' . $unit . '!';
             if ($this->settings['report.']['email']) {
+                // @extensionScannerIgnoreLine
                 while (false !== ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
                     $rows[] = $row;
                 }
@@ -119,6 +122,7 @@ class IPBlocking extends AbstractInterceptor
                         $where .= ' AND ip=\'' . \TYPO3\CMS\Core\Utility\GeneralUtility::getIndpEnv('REMOTE_ADDR') . '\'';
                     }
 
+                    // @extensionScannerIgnoreLine
                     $count = $GLOBALS['TYPO3_DB']->exec_SELECTcountRows('*', $this->logTable, $where);
                     if ($count > 0) {
                         $send = true;
@@ -136,6 +140,7 @@ class IPBlocking extends AbstractInterceptor
                     $this->utilityFuncs->debugMessage('alert_mail_not_sent', [], 2);
                 }
             }
+            // @extensionScannerIgnoreLine
             $GLOBALS['TYPO3_DB']->sql_free_result($res);
             if ($this->settings['redirectPage']) {
                 $this->utilityFuncs->doRedirectBasedOnSettings($this->settings, $this->gp);
