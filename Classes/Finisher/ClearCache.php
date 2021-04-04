@@ -14,6 +14,8 @@ namespace Typoheads\Formhandler\Finisher;
      * Public License for more details.                                       *
      *                                                                        */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * This finisher clears the cache.
  * If no further configuration is set the current page's cache will be cleared.
@@ -49,7 +51,11 @@ class ClearCache extends AbstractFinisher
 
         $this->utilityFuncs->debugMessage('Clearing Cache', [$pidList]);
 
-        $GLOBALS['TSFE']->clearPageCacheContent_pidList($pidList);
+        $pageIds = GeneralUtility::trimExplode(',', $pidList);
+        foreach ($pageIds as $pageId) {
+            // @extensionScannerIgnoreLine
+            $GLOBALS['TSFE']->pageCache->remove('pageId_' . (int)$pageId);
+        }
         return $this->gp;
     }
 }
