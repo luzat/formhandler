@@ -54,7 +54,6 @@ class Dispatcher extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin
      */
     public function main($content, $setup)
     {
-        $this->pi_USER_INT_obj = 1;
         $this->componentManager = GeneralUtility::makeInstance(\Typoheads\Formhandler\Component\Manager::class);
         $this->globals = GeneralUtility::makeInstance(\Typoheads\Formhandler\Utility\Globals::class);
         $this->utilityFuncs = GeneralUtility::makeInstance(\Typoheads\Formhandler\Utility\GeneralUtility::class);
