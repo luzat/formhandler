@@ -28,9 +28,9 @@
  */
 class tx_formhandler_pi1 extends TYPO3\CMS\Frontend\Plugin\AbstractPlugin
 {
-    var $prefixId = 'tx_formhandler_pi1';
-    var $scriptRelPath = 'pi1/class.tx_formhandler_pi1.php';
-    var $extKey = 'formhandler';
+    public $prefixId = 'tx_formhandler_pi1';
+    public $scriptRelPath = 'pi1/class.tx_formhandler_pi1.php';
+    public $extKey = 'formhandler';
 
     /**
      * The main method of the PlugIn
@@ -39,7 +39,7 @@ class tx_formhandler_pi1 extends TYPO3\CMS\Frontend\Plugin\AbstractPlugin
      * @param    array $conf : The PlugIn configuration
      * @return   string The content that is displayed on the website
      */
-    public function main($content, $conf)
+    public function main(string $content, array $conf): string
     {
         // q3i - just tag to find changes on possible update in future
         // wolo fix - make dispatcher xclassable
